@@ -1,5 +1,9 @@
+const dotenv = require('dotenv').config()
 const router = require('express').Router();
 const db = require('./db');
+const multer = require("multer");
+const { s3Uploadv2, s3Uploadv3 } = require("./s3Service");
+const uuid = require("uuid").v4;
 
 router.get('/', (req, res) => {
   res.status(200).json('hello!')
@@ -26,6 +30,36 @@ router.get('/users/current', (req, res) => {
   .then(data => {res.status(200).send(data.rows[0])})
   .catch(e => {console.log('get /users error', e); res.status(500).send(e)})
 })
+
+
+// photos
+
+const storage = multer.memoryStorage();
+
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.split("/")[0] === "image") {
+    cb(null, true);
+  } else {
+    cb(new multer.MulterError("LIMIT_UNEXPECTED_FILE"), false);
+  }
+};
+
+const upload = multer({
+  storage,
+  fileFilter,
+  limits: { fileSize: 1000000000, files: 2 },
+});
+
+
+router.post("/upload", upload.array("file"), async (req, res) => {
+  try {
+    const results = await s3Uploadv3(req.files);
+    console.log(results);
+    return res.json({ status: "success" });
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 module.exports = router;
 
