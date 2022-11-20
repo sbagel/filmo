@@ -14,12 +14,11 @@ function Index() {
 
   useEffect(() => {
     if (count === 2) {
-
+      console.log('newUser',newUser)
       axios.post('/api/users/new', newUser)
         .then(res => console.log('posted'))
+        .then(() => navigate('/'))
         .catch(e => console.log('error'))
-
-      navigate('/')
     }
   }, [count])
 

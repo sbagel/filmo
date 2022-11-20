@@ -1,4 +1,4 @@
-import { useAuthState } from '~/components/contexts/UserContext';
+import { useAuthState } from '~/components/contexts/AuthContext';
 import { SignUpButton } from '~/components/domain/auth/SignUpButton';
 import { useEffect, useState } from 'react';
 import Button from '~/components/shared/Button'

@@ -1,12 +1,18 @@
-import { User } from '~/components/contexts/TestContext';
+// import React, { useState } from "react";
+// import { FileUploader } from "react-drag-drop-files";
 
-export default (props) => {
+// const fileTypes = ["JPG", "PNG", "GIF", "JPEG"];
 
-  console.log(User())
+// function DragDrop() {
+//   const [file, setFile] = useState(null);
 
-  return (
-    <div>
+//   const handleChange = (file) => {
+//     setFile(file);
+//   };
 
-    </div>
-  )
-}
+//   return (
+//     <FileUploader handleChange={handleChange} name="file" types={fileTypes} />
+//   );
+// }
+
+// export default DragDrop;

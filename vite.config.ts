@@ -9,13 +9,9 @@ export default defineConfig({
     cors: true,
     proxy: {
       '/api': {
-        target: 'ws://localhost:4002/api/',
+        target: 'ws://localhost:3003/api/',
         ws: true,
         rewrite: (path) => path.replace(/^\/api/, '')
-
-        // target: 'http://localhost:4002/api/test',
-        // changeOrigin: true,
-        // rewrite: (path) => path.replace(/^\/api/, '')
       },
     },
   },

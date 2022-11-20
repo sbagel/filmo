@@ -18,16 +18,20 @@ exports.s3Uploadv2 = async (files) => {
 
 exports.s3Uploadv3 = async (files) => {
   const s3client = new S3Client();
+  const fileNames = []
 
   const params = files.map((file) => {
+    const key = `${uuid()}-${file.originalname}`
+    fileNames.push(`https://filmo.s3.us-west-2.amazonaws.com/uploads/${key}`)
     return {
       Bucket: process.env.AWS_BUCKET_NAME,
-      Key: `uploads/${uuid()}-${file.originalname}`,
+      Key: 'uploads/'+key,
       Body: file.buffer,
+      ContentType: 'image/jpeg'
     };
   });
 
   return await Promise.all(
     params.map((param) => s3client.send(new PutObjectCommand(param)))
-  );
+  ), fileNames
 };

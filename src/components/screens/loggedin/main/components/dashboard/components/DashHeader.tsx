@@ -1,10 +1,10 @@
 import { FaSearch } from 'react-icons/fa';
 
-function DashHeader() {
+function DashHeader({user}) {
   return (
     <div className="flex text-milk sticky px-20">
       <SearchBar/>
-      <End/>
+      <End user={user}/>
     </div>
   )
 }
@@ -18,7 +18,7 @@ function SearchBar(){
   )
 }
 
-function End(){
+function End({user}){
   return(
     <div className="flex justify-end flex-grow items-center">
       {/* get pro */}
@@ -29,7 +29,7 @@ function End(){
       <VertDivider/>
       {/* avatar  */}
       <div className="avatar">
-        <a href='/username'><div className="w-10 h-10 rounded"><img className="object-cover rounded" src="https://i.pinimg.com/736x/82/48/c7/8248c796c581dfeeb693837dc014499e--pillsbury-dough-boys-paid-surveys.jpg"/></div></a>
+        <a href='/username'><div className="w-10 h-10 rounded"><img className="object-cover rounded" src={user.avatar}/></div></a>
       </div>
     </div>
   )

@@ -43,3 +43,13 @@ export const useFirestore = () => {
   }
   return firestore;
 };
+
+export const useStorage = () => {
+  if (!storage) {
+    storage = getStorage();
+    if (useEmulator()) {
+      connectStorageEmulator(storage, 'localhost', 9199);
+    }
+  }
+  return storage;
+};

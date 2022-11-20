@@ -10,6 +10,8 @@ const SigninScreen = lazy(() => import('~/components/screens/landing/signin/Inde
 const SignupScreen = lazy(() => import('~/components/screens/landing/signup/Index'));
 const LoggedInScreen = lazy(() => import('~/components/screens/loggedin/main/Index'));
 const UserScreen = lazy(() => import('~/components/screens/loggedin/userprofile/UserProfile'));
+const PhotosScreen = lazy(() => import ('~/components/screens/loggedin/photos/Photos'))
+const UploadScreen = lazy(() => import ('~/components/screens/loggedin/upload/Upload'))
 const TestScreen = lazy(() => import('~/components/screens/Test'));
 
 
@@ -49,6 +51,14 @@ const InnerRouter = () => {
         {
           path: '/username',
           element: <UserScreen />,
+        },
+        {
+          path: '/photos',
+          element: <PhotosScreen/>,
+        },
+        {
+          path: '/upload',
+          element: <UploadScreen/>,
         },
         {
           path: '*',

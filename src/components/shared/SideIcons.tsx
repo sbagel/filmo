@@ -1,4 +1,6 @@
-import { FaHome, FaPhotoVideo, FaRegHeart, FaRegPaperPlane, FaSignOutAlt } from 'react-icons/fa';
+import { FaHome, FaRegHeart, FaRegPaperPlane, FaSignOutAlt } from 'react-icons/fa';
+import { IoMdPhotos } from "react-icons/io";
+import { FiSettings } from "react-icons/fi";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from "~/lib/firebase";
 
@@ -14,8 +16,9 @@ function SideIcons() {
   return (
     <>
       <IconTemplate icon={<FaHome/>} url="/" title="Home"/>
-      <IconTemplate icon={<FaPhotoVideo/>} url="/photos" title="My photos"/>
+      <IconTemplate icon={<IoMdPhotos/>} url="/photos" title="My photos"/>
       <IconTemplate icon={<FaRegHeart/>} url="/likes" title="My likes"/>
+      <IconTemplate icon={<FiSettings/>} url="/settings" title="Settings"/>
       <IconTemplate icon={<FaRegPaperPlane/>} url="/messages" title="Messages"/>
 
       {/* sign out icon */}
