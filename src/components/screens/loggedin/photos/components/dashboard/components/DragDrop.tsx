@@ -20,8 +20,8 @@ function DragDrop() {
       name="file"
       types={fileTypes}
       children={
-        <div className="flex h-[30rem justify-center items-center text-milk">
-          <div className="flex flex-col items-center justify-center h-[30rem] text-center">
+        <div className="flex flex-grow h-[40rem] w-[60rem] cursor-pointer justify-center items-center text-milk">
+          <div className="flex flex-col items-center justify-center text-center">
 
             <SlCloudUpload size={200}/>
             <p className="text-[3rem] font-bold">Drag and drop photos</p>
