@@ -63,4 +63,16 @@ router.post("/upload", upload.array("file"), async (req, res) => {
   }
 });
 
+router.post("/photos/upload", upload.array("file"), async (req, res) => {
+  const obj = JSON.parse(JSON.stringify(req.body))
+  console.log(obj)
+  try {
+    const results = await s3Uploadv3(req.files);
+    console.log('heyy uploaded', results);
+    return res.json({ status: "success", results: results});
+  } catch (err) {
+    console.log(err);
+  }
+});
+
 module.exports = router;

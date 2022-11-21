@@ -45,7 +45,9 @@ module.exports = {
     },
   },
   important: true,
-  variants: {},
+  variants: {
+    backgroundColor: ['responsive', 'hover', 'focus', 'active']
+  },
   plugins: [
     require('daisyui'),
   ]

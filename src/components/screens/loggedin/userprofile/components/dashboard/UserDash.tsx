@@ -1,10 +1,10 @@
 import UserDashHeader from './components/UserDashHeader'
 import UserFeed from './components/feed/UserFeed'
 
-function UserDash({user, blur}) {
+function UserDash({user}) {
   return (
     <div className="flex flex-col flex-grow">
-      <UserDashHeader user={user} blur={blur}/>
+      <UserDashHeader user={user}/>
       <UserFeed/>
     </div>
   )
