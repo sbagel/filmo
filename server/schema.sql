@@ -17,9 +17,9 @@ CREATE TABLE IF NOT EXISTS users(
 
 CREATE TABLE IF NOT EXISTS photos(
   id integer PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  username text REFERENCES users(username),
+  username text NOT NULL,
   url text,
-  title text NOT NULL,
+  title text,
   description text,
   pinned boolean
 );

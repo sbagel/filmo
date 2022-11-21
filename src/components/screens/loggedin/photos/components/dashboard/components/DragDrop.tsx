@@ -8,6 +8,8 @@ const fileTypes = ["JPG", "PNG", "GIF", "JPEG"];
 
 function DragDrop() {
   const [file, setFile] = useState(null);
+  const [links, setLinks] = useState(null)
+  const {user, setUser} = useContext(ProfileContext)
   const formData = new FormData();
 
   const handleChange = (newFile) => {
@@ -21,8 +23,17 @@ function DragDrop() {
   const handleUpload = async () => {
     Object.values(file).map((curFile) => { formData.append('file', curFile)})
 
-    axios.post('/api/photos/upload', formData, { headers: {'Content-Type': 'multipart/form-data'}})
-      .then(res => {console.log(res.data)})
+    axios.post('/api/upload', formData, { headers: {'Content-Type': 'multipart/form-data'}})
+      .then(res => {
+        res.data.results.forEach(curResult => {
+          axios.post('/api/user/current/photos', {
+            username: user.username,
+            result: curResult
+          })
+            .then(res => console.log(res))
+            .catch(e => console.log(e))
+        })
+      })
       .catch(e => console.log(e))
   }
 

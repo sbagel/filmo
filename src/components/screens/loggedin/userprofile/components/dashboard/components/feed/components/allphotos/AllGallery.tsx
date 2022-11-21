@@ -1,38 +1,45 @@
+import { ProfileContext } from '~/components/contexts/ProfileContext';
 import Gallery from "@jussmor/react-photo-gallery";
+import axios from 'axios';
+import { useState, useContext, useEffect } from "react";
+import reactImageSize from 'react-image-size';
+
 
 function AllGallery() {
-  const photos = [
-    {
-      src: "https://source.unsplash.com/2ShvY8Lf6l0/800x599",
-      width: 4,
-      height: 3
-    },
-    {
-      src: "https://source.unsplash.com/Dm-qxdynoEc/800x799",
-      width: 1,
-      height: 1
-    },
-    {
-      src: "https://source.unsplash.com/qDkso9nvCg0/600x799",
-      width: 3,
-      height: 4
-    },
-    {
-      src: "https://source.unsplash.com/iecJiKe_RNg/600x799",
-      width: 3,
-      height: 4
-    },
-    {
-      src: "https://source.unsplash.com/epcsn8Ed8kY/600x799",
-      width: 3,
-      height: 4
-    },
- ];
+  const {user, setUser} = useContext(ProfileContext)
+  const [photos, setPhotos] = useState([])
 
+  useEffect(() => {
+    if (user) {
+      axios.get(`/api/users/current/photos?username=${user.username}`)
+        .then(res => res.data.forEach(photo => {
+          reactImageSize(photo.url)
+            .then(({ width, height }) => {
+              if (width>height) {
+                setPhotos(prev=>[...prev, {
+                  src: photo.url,
+                  width: 4,
+                  height: 3,
+                }])
+              } else {
+                setPhotos(prev=>[...prev, {
+                  src: photo.url,
+                  width: 3,
+                  height: 4,
+                }])
+              }
+            })
+            .catch((e) => console.log(e));
+        }))
+        .catch(e => console.log(e))
+    }
+  }, [user])
+
+  console.log(photos)
 
   return (<>
-  <Gallery photos={photos} direction={"column"}/>
-    </>
+    {photos ? <Gallery photos={photos} direction="row"/> : null }
+      </>
   )
 }
 

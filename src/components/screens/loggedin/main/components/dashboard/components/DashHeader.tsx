@@ -24,7 +24,7 @@ function End({user}){
       {/* get pro */}
       <div className="mr-3 font-semibold text-sm"><a href="/pro">Get Pro</a></div>
       {/* upload button */}
-      <a href="/upload"><button type="button" className="bg-cornflower rounded-full w-[5.5rem] h-[2.5rem] text-sm font-bold">Upload</button></a>
+      <a href="/photos"><button type="button" className="bg-cornflower rounded-full w-[5.5rem] h-[2.5rem] text-sm font-bold">Upload</button></a>
       {/* divider */}
       <VertDivider/>
       {/* avatar  */}
