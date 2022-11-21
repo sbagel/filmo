@@ -1,42 +1,41 @@
+import { ProfileContext } from '~/components/contexts/ProfileContext';
 import Gallery from "@jussmor/react-photo-gallery";
+import axios from 'axios';
+import { useState, useContext, useEffect } from "react";
+import reactImageSize from 'react-image-size';
 
-function PinnedGallery() {
-  const photos = [
-    {
-      src: "https://source.unsplash.com/2ShvY8Lf6l0/800x599",
-      width: 4,
-      height: 3
-    },
-    {
-      src: "https://source.unsplash.com/Dm-qxdynoEc/800x799",
-      width: 1,
-      height: 1
-    },
-    {
-      src: "https://source.unsplash.com/qDkso9nvCg0/600x799",
-      width: 3,
-      height: 4
-    },
-    {
-      src: "https://source.unsplash.com/iecJiKe_RNg/600x799",
-      width: 3,
-      height: 4
-    },
-    {
-      src: "https://source.unsplash.com/epcsn8Ed8kY/600x799",
-      width: 3,
-      height: 4
-    },
- ];
+function AllGallery() {
+  const { user, setUser } = useContext(ProfileContext)
+  const [ images, setImages ] = useState([])
+  const [ update, setUpdate ] = useState(false)
 
+  useEffect(()=>{
+    if (user) {
+      axios.get(`/api/users/current/pinnedphotos?username=${user.username}`)
+        .then(res => {if (res.data.length!==images.length){
+          res.data.forEach(photo => {
+            setImages(prev=>[...prev, {
+              src: photo.url,
+              pinned: photo.pinned
+            }])
+          })
+        }})
+    }
+  }, [update])
 
-  return (<>
-  <Gallery photos={photos}/>
-    </>
+  return (
+    <div className='flex [&>*]:mr-[.5rem]'>
+      {images.length?
+      images.map((image, i) =>
+        <div className='w-[15rem] relative' key={i}>
+          <img src={image.src} alt="user photo"/>
+        </div>)
+    :
+    null}
+    </div>
   )
 }
 
-
-export default PinnedGallery
+export default AllGallery
 
 

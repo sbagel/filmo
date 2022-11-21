@@ -1,4 +1,5 @@
 import { useState, useContext } from "react";
+import { useNavigate } from 'react-router-dom';
 import { FileUploader } from "react-drag-drop-files-adjusted";
 import { SlCloudUpload } from "react-icons/sl";
 import { ProfileContext } from '~/components/contexts/ProfileContext';
@@ -11,6 +12,7 @@ function DragDrop() {
   const [links, setLinks] = useState(null)
   const {user, setUser} = useContext(ProfileContext)
   const formData = new FormData();
+  const navigate = useNavigate();
 
   const handleChange = (newFile) => {
     setFile(newFile);
@@ -30,7 +32,7 @@ function DragDrop() {
             username: user.username,
             result: curResult
           })
-            .then(res => console.log(res))
+            .then(res => navigate('/username'))
             .catch(e => console.log(e))
         })
       })
@@ -67,7 +69,7 @@ function DragDrop() {
                 </div>
               </>
           :
-          <div className="flex flex-grow h-[40rem] w-[60rem] cursor-pointer justify-center items-center text-milk">
+          <div className="flex flex-grow h-[50rem] w-[80rem] cursor-pointer justify-center items-center text-milk">
             <div className="flex flex-col items-center justify-center text-center">
               <SlCloudUpload size={200}/>
               <p className="text-[3rem] font-bold">Drag and drop photos</p>

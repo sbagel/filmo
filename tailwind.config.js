@@ -25,21 +25,24 @@ module.exports = {
         milk: '#F6F6F5ff',
         cornflower: '#499bf8',
       },
+      animation: {
+        "tracking-in-expand-fwd-bottom": "tracking-in-expand-fwd-bottom 1s cubic-bezier(0.215, 0.610, 0.355, 1.000)   both"
+      },
       keyframes: {
-        animIn: {
-          '100%': {
-            opacity: '0%',
-            bordeRadius: '0',
-            width: "600px",
-            height: '600px',
-          },
-          '0%': {
-            width: '0px',
-            height: '0px',
-            bordeRadius: '100%',
-            opacity: '20%',
-          },
-        },
+        "tracking-in-expand-fwd-bottom": {
+            "0%": {
+                "letter-spacing": "-.5em",
+                transform: "translateZ(-700px) translateY(500px)",
+                opacity: "0"
+            },
+            "40%": {
+                opacity: ".6"
+            },
+            to: {
+                transform: "translateZ(0) translateY(0)",
+                opacity: "1"
+            }
+        }
       },
       visibility: ["container-hover"],
     },

@@ -47,7 +47,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage,
   fileFilter,
-  limits: { fileSize: 1000000000, files: 2 },
+  limits: { fileSize: 1000000000, files: 30 },
 });
 
 router.post("/upload", upload.array("file"), async (req, res) => {
@@ -77,7 +77,7 @@ router.post('/user/current/photos', (req, res) => {
 })
 
 router.get('/users/current/photos', (req, res) => {
-  const query = "SELECT * FROM photos WHERE username=$1"
+  const query = "SELECT * FROM photos WHERE username=$1 ORDER BY id asc"
 
   db.query(query, [req.query.username])
   .then(data => {res.status(200).send(data.rows)})
@@ -90,6 +90,19 @@ router.get('/users/current/pinnedphotos', (req, res) => {
   db.query(query, [req.query.username, true])
   .then(data => {res.status(200).send(data.rows)})
   .catch(e => {console.log('get /users error', e); res.status(500).send(e)})
+})
+
+router.put('/photos/pin', (req, res) => {
+
+  console.log('put!!!!', req.query)
+  const query = `
+    UPDATE photos
+    SET pinned = NOT pinned
+    WHERE url = $1
+  `
+  db.query(query, [req.query.url])
+  .then(data => {res.status(204).send()})
+  .catch(e => {console.log('put /photos/pin error', e); res.status(500).send(e)})
 })
 
 module.exports = router;

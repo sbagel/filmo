@@ -16,9 +16,12 @@ function Photos() {
     <Head title="Photos"></Head>
     {/* nav bar */}
     <PhotosNav user={user}/>
-    <div className="  min-h-screen flex bg-gradient-to-tr from-dash via-black to-dash scroll-smooth">
+    <div className="min-h-screen flex bg-gradient-to-tr from-dash via-black to-dash scroll-smooth">
       <SideBar user={user} category={category} setCategory={setCategory}/>
-      <PhotosDashboard category={category}/>
+      <div className='w-[88rem] p-[1rem]'>
+      <PhotosDashboard category={category} setCategory={setCategory}/>
+      </div>
+
     </div>
     </>
     :
